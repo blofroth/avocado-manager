@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const API = 'http://localhost:8080/avocados';
-const DEFAULT_QUERY = 'redux';
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +10,7 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    fetch(API)
+    fetch(window._env_.backend_root + "/avocados")
       .then(response => response.json())
       .then(data => {console.log(data); this.setState({ avocados: data }) });
   }

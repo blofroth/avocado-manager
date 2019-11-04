@@ -1,0 +1,3 @@
+window._env_ = {
+  backend_root: "$BACKEND_ROOT"
+}
