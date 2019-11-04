@@ -1,7 +1,7 @@
 steps:
 - name: maven:3.6.0-jdk-11-slim
   entrypoint: 'mvn'
-  args: ['install']
+  args: ['install', '--batch-mode', '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN']
   dir: 'backend'
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/avocado-manager-backend', '-f', 'src/main/docker/Dockerfile.jvm', '.' ]
