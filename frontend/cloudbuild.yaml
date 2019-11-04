@@ -2,7 +2,7 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['install']
 - name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'install']
+  args: ['run', 'build']
 #- name: 'gcr.io/cloud-builders/npm' 
 # args: ['test']
 - name: 'gcr.io/cloud-builders/docker' 
