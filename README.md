@@ -80,6 +80,15 @@ Configure these triggers in Cloud Build:
 | -------------             | ------------- | -----                           | ------                          |
 | deploy-avocado-frontend   | Push to tag   | frontend-[0-9]+\.[0-9]+\.[0-9]+ | deploy-frontend.cloudbuild.yaml | 
 | deploy-avocado-backend    | Push to tag   | backend-[0-9]+\.[0-9]+\.[0-9]+  | deploy-backend.cloudbuild.yaml 	|
+
+You need to add IAM permissions to Cloud build to access the GKE cluster:
+```
+PROJECT_ID=your-gcp-project-id
+PROJECT_NUMBER="$(gcloud projects describe ${PROJECT_ID} --format='get(projectNumber)')"
+gcloud projects add-iam-policy-binding ${PROJECT_NUMBER} \
+    --member=serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com \
+    --role=roles/container.developer
+```
 				
 To trigger a deploy of the backend service in the currently checked out commit, with tag 1.0.0:
 
