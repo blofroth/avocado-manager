@@ -23,7 +23,7 @@ spec:
         app: avocado-backend
     spec:
       containers:
-      - image: gcr.io/gke-lunch/avocado-manager-backend:0976765
+      - image: gcr.io/gke-lunch/avocado-manager-backend:074c198
         imagePullPolicy: IfNotPresent
         name: avocado-backend
         livenessProbe:

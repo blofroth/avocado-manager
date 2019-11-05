@@ -10,7 +10,7 @@ kubectl expose deployment avocado-frontend --port 80 --type LoadBalancer
 svc=avocado-backend
 external_ip=""
 while [ -z $external_ip ]; do
-  echo "Waiting for end point..."
+  echo "Waiting for public ip for service $svc..."
   external_ip=$(kubectl get svc $svc --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
   [ -z "$external_ip" ] && sleep 10
 done
