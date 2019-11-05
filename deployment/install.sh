@@ -18,6 +18,7 @@ echo "Service $svc recieved public ip: $external_ip"
 
 kubectl set env deployment/avocado-frontend BACKEND_ROOT="http://$external_ip"
 
+external_ip=""
 svc=avocado-frontend
 while [ -z $external_ip ]; do
   echo "Waiting for public ip for service $svc..."
