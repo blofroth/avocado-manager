@@ -1,4 +1,4 @@
-# &#129361; Avocado Manager 2019
+# &#129361; Avocado Manager 2019 &#129361;
 Manage your avocados like it's 2019.
 
 And learn GKE and Google Cloud Build while you're at it.
@@ -8,7 +8,7 @@ The application consists of two components:
 
 * backend
   * Java 8/Quarkus/MicroProfile application
-  * exposes one rest endpoint ´/avocados´ which returns a list of JSON objects
+  * exposes one rest endpoint `/avocados` which returns a list of JSON objects
 * frontend
   * JS/React/NPM/Nginx front end
   * uses the backend service to populate a list of avocados to display
