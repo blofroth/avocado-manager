@@ -10,6 +10,5 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=europe-north1'
   - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster'
-
 images:
   - 'gcr.io/$PROJECT_ID/avocado-manager-frontend:$TAG_NAME'

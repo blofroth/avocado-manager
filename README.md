@@ -14,7 +14,7 @@ The application consists of two components:
   * uses the backend service to populate a list of avocados to display
 
 
-## Setting up Cloud Build with triggers
+## Setting up Cloud Build for images with triggers
 The project is build using Google Cloud Build:
 https://cloud.google.com/cloud-build/
 
@@ -62,3 +62,33 @@ https://console.cloud.google.com/cloud-build/triggers
 8. Check the public IP of the frontend:
   * `kubectl get svc -w`
 9. Open the IP in a browser, and voilà, avocados!
+
+## Deploying into a GKE cluste with a script 
+
+Install:
+`sh deployment/install.sh`
+
+This will wait until both services receive public IP:s.
+
+Uninstall:
+`sh deployment/uninstall.sh`
+
+## GitOps deploys with triggers
+Configure these triggers in Cloud Build:
+
+| Trigger name              | Type          | Regex                           | Build file                      |
+| -------------             | ------------- | -----                           | ------                          |
+| deploy-avocado-frontend   | Push to tag   | frontend-[0-9]+\.[0-9]+\.[0-9]+ | deploy-frontend.cloudbuild.yaml | 
+| deploy-avocado-backend    | Push to tag   | backend-[0-9]+\.[0-9]+\.[0-9]+  | deploy-backend.cloudbuild.yaml 	|
+				
+To trigger a deploy of the backend service in the currently checked out commit, with tag 1.0.0:
+
+`TAG=1.0.0; git tag backend-$TAG; git push origin backend-$TAG`
+
+To trigger a deploy of the frontend service in the currently checked out commit, with tag 1.0.0:
+`TAG=1.0.0; git tag frontend-$TAG; git push origin frontend-$TAG`
+
+Some limitations and quirks:
+* Any new tag independent of version sequence would trigger a new deploy in that tag
+* If you change the deploy-cloudbuild files, there would not exist a matching image in that commit, since they are only built on changes to `backend/**` or `frontend/**` files. Simplest solution is to make dummy commit in the relevant subfolder. Perhaps a `bump-after` file where you put the commit hash of the change to the cloudbuild file.
+* Rule of thumb: tag `backend-...` only for commits that touch `backend/**` and vice versa for frontend.
