@@ -1,0 +1,17 @@
+#!/bin/bash
+
+kubectl apply -f backend.deployment.yaml
+kubectl apply -f frontend.deployment.yaml
+kubectl expose deployment avocado-backend --port 80 --type LoadBalancer
+kubectl expose deployment avocado-frontend --port 80 --type LoadBalancer
+
+svc=avocado-backend
+external_ip=""
+while [ -z $external_ip ]; do
+  echo "Waiting for end point..."
+  external_ip=$(kubectl get svc $svc --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
+  [ -z "$external_ip" ] && sleep 10
+done
+echo "Service $svc recieved public ip: $external_ip"
+
+kubectl set env deployment/avocado-frontend BACKEND_ROOT="http://external_ip"
