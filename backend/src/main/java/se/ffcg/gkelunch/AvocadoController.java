@@ -22,8 +22,9 @@ public class AvocadoController {
         avocados.add(new Avocado(UUID.randomUUID().toString(),10, LocalDate.of(2019,11,5), "Hass"));
     }
 
+    /** Get all drafted avocados */
     @GET
-    public Set<Avocado> hello() {
+    public Set<Avocado> getAvocados() {
         return avocados;
     }
 }
