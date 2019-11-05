@@ -16,4 +16,12 @@ while [ -z $external_ip ]; do
 done
 echo "Service $svc recieved public ip: $external_ip"
 
-kubectl set env deployment/avocado-frontend BACKEND_ROOT="http://external_ip"
+kubectl set env deployment/avocado-frontend BACKEND_ROOT="http://$external_ip"
+
+svc=avocado-frontend
+while [ -z $external_ip ]; do
+  echo "Waiting for public ip for service $svc..."
+  external_ip=$(kubectl get svc $svc --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
+  [ -z "$external_ip" ] && sleep 10
+done
+echo "Avocado Manager installed. Open: http://$external_ip"
