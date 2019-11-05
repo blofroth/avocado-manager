@@ -1,5 +1,5 @@
 steps:
-- name: maven:3.6.0-jdk-11-slim
+- name: gcr.io/cloud-builders/mvn
   entrypoint: 'mvn'
   args: ['install', '--batch-mode', '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN']
   dir: 'backend'
