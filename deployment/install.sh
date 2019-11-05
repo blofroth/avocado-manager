@@ -1,7 +1,9 @@
 #!/bin/bash
 
-kubectl apply -f backend.deployment.yaml
-kubectl apply -f frontend.deployment.yaml
+DIR=$(dirname "$0")
+
+kubectl apply -f $DIR/backend.deployment.yaml
+kubectl apply -f $DIR/frontend.deployment.yaml
 kubectl expose deployment avocado-backend --port 80 --type LoadBalancer
 kubectl expose deployment avocado-frontend --port 80 --type LoadBalancer
 

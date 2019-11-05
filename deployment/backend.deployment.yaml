@@ -26,16 +26,16 @@ spec:
       - image: gcr.io/gke-lunch/avocado-manager-backend:0976765
         imagePullPolicy: IfNotPresent
         name: avocado-backend
-      livenessProbe:
-        httpGet:
-          path: /health/live
-          port: 8080
-        initialDelaySeconds: 3
-        periodSeconds: 3
-      readinessProbe:
-        httpGet:
-          path: /health/ready
-          port: 8080
-        initialDelaySeconds: 3
-        periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
       
