@@ -28,7 +28,7 @@ spec:
           value: dummy
         image: gcr.io/gke-lunch/avocado-manager-frontend:cd5eff2
         imagePullPolicy: IfNotPresent
-        name: avocado-frontend
+        name: frontend
         livenessProbe:
           httpGet:
             path: /

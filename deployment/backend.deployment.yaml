@@ -25,7 +25,7 @@ spec:
       containers:
       - image: gcr.io/gke-lunch/avocado-manager-backend:074c198
         imagePullPolicy: IfNotPresent
-        name: avocado-backend
+        name: backend
         livenessProbe:
           httpGet:
             path: /health/live
